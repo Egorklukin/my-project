@@ -21,7 +21,9 @@ h2 {
 .card__content {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   text-align: left;
+  height: 100%;
 }
 
 .card__title {
@@ -54,8 +56,4 @@ h2 {
 
 .no-rating {
   color: gray;
-}
-
-no-note {
-  color: transparent;
 }
