@@ -1,4 +1,4 @@
-export function Book() {
+export function BookAddForm() {
   return (
     <section className="new-book">
       <form className="book-form">
