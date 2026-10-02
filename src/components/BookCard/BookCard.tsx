@@ -34,7 +34,7 @@ export function BookCard(props: { book: Book }) {
             <h2 className="card__rating">{rating || "Вы не оставили отзыв"}</h2>
           </div>
         )}
-        {!note || (
+        {note && (
           <div className="container-note container">
             <img src="src\assets\note.png" width={15} height={15} />
             <h2 className="card___note">{note}</h2>
