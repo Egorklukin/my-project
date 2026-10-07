@@ -1,3 +1,7 @@
+import styled from "@emotion/styled";
+
 export function Footer() {
-  return <footer>подвал</footer>;
+  const Footer = styled.footer``;
+
+  return <Footer>подвал</Footer>;
 }

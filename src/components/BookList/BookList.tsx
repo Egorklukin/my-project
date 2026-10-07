@@ -1,17 +1,24 @@
+import styled from "@emotion/styled";
 import type { BookCardProps } from "../../props/BookCardProps";
 import { BookCard } from "../BookCard/BookCard";
-import "./BoookList.css";
 
 export function BookList(props: BookCardProps) {
+  const ListSection = styled.section``;
+  const ListTitle = styled.h2``;
+  const BookList = styled.div`
+    display: flex;
+    flex-direction: row;
+  `;
+
   const { books } = props;
   return (
-    <section>
-      <h2>Список книг</h2>
-      <div className="list">
+    <ListSection>
+      <ListTitle>Список книг</ListTitle>
+      <BookList>
         {books.map((book) => (
           <BookCard book={book} key={book.id} />
         ))}
-      </div>
-    </section>
+      </BookList>
+    </ListSection>
   );
 }

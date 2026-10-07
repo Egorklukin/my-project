@@ -1,9 +1,71 @@
 import type { Book } from "../../types/BookType";
 import styled from "@emotion/styled";
-import "./BookCard.css";
+
+const Card = styled.article`
+  gap: 10px;
+  margin: 10px 20px;
+  max-width: 190px;
+  height: 100%;
+`;
+
+const CardContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  height: 100%;
+`;
 
 const TitleCard = styled.h1`
   letter-spacing: normal;
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+const AuthorCard = styled.h2`
+  color: rgb(105, 105, 105);
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+const StatusCard = styled.h2`
+  text-wrap: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+const CoverCard = styled.div``;
+
+const CoverImgCard = styled.img`
+  height: 270px;
+  width: 180px;
+  border-radius: 14px;
+`;
+
+const RaitingCard = styled.h2`
+  text-align: right;
+  font-size: 14px;
+  font-weight: 500;
+`;
+const NoRaitingCard = styled.h2`
+  font-size: 14px;
+  font-weight: 500;
+  text-align: right;
+  color: gray;
+`;
+
+const NoteCard = styled.h2`
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+const ImgCard = styled.img``;
+
+const ContainerCard = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  gap: 5px;
+  justify-content: left;
 `;
 
 const formatStatus = {
@@ -21,35 +83,35 @@ const getUrlImg = {
 export function BookCard(props: { book: Book }) {
   const { title, author, status, rating, note, cover } = props.book;
   return (
-    <article className="card">
-      <div className="card__cover">
-        <img src={cover} />
-      </div>
-      <div className="card__content">
+    <Card>
+      <CoverCard>
+        <CoverImgCard src={cover} />
+      </CoverCard>
+      <CardContent>
         <TitleCard>{title}</TitleCard>
-        <div className="container-author container">
-          <h2 className="card__author">{author}</h2>
-          <img src="src\assets\author.png" width={15} height={15} />
-        </div>
+        <ContainerCard>
+          <AuthorCard>{author}</AuthorCard>
+          <ImgCard src="src\assets\author.png" width={15} height={15} />
+        </ContainerCard>
         {status == "want" || status == "reading" ? (
-          <h2 className="card__rating no-rating">Вы еще не прочитали</h2>
+          <NoRaitingCard>Вы еще не прочитали</NoRaitingCard>
         ) : (
-          <div className="container-rating container">
-            <img src="src\assets\raiting.png" width={15} height={15} />
-            <h2 className="card__rating">{rating || "Вы не оставили отзыв"}</h2>
-          </div>
+          <ContainerCard>
+            <ImgCard src="src\assets\raiting.png" width={15} height={15} />
+            <RaitingCard>{rating || "Вы не оставили отзыв"}</RaitingCard>
+          </ContainerCard>
         )}
         {note && (
-          <div className="container-note container">
-            <img src="src\assets\note.png" width={15} height={15} />
-            <h2 className="card___note">{note}</h2>
-          </div>
+          <ContainerCard>
+            <ImgCard src="src\assets\note.png" width={15} height={15} />
+            <NoteCard>{note}</NoteCard>
+          </ContainerCard>
         )}
-        <div className="container-status container">
-          <img src={getUrlImg[status]} width={15} height={15} />
-          <h2 className="card__status">{formatStatus[status]}</h2>
-        </div>
-      </div>
-    </article>
+        <ContainerCard>
+          <ImgCard src={getUrlImg[status]} width={15} height={15} />
+          <StatusCard>{formatStatus[status]}</StatusCard>
+        </ContainerCard>
+      </CardContent>
+    </Card>
   );
 }
