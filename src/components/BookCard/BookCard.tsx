@@ -1,5 +1,10 @@
 import type { Book } from "../../types/BookType";
+import styled from "@emotion/styled";
 import "./BookCard.css";
+
+const TitleCard = styled.h1`
+  letter-spacing: normal;
+`;
 
 const formatStatus = {
   want: "Запланировано",
@@ -21,7 +26,7 @@ export function BookCard(props: { book: Book }) {
         <img src={cover} />
       </div>
       <div className="card__content">
-        <h1 className="card__title">{title}</h1>
+        <TitleCard>{title}</TitleCard>
         <div className="container-author container">
           <h2 className="card__author">{author}</h2>
           <img src="src\assets\author.png" width={15} height={15} />

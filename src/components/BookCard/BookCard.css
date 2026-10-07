@@ -21,13 +21,8 @@ h2 {
 .card__content {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   text-align: left;
   height: 100%;
-}
-
-.card__title {
-  letter-spacing: normal;
 }
 
 .card__author {
