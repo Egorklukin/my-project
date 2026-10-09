@@ -3,6 +3,7 @@ import { BookAddForm } from "./components/BookAddForm/BookAddForm";
 import { BookList } from "./components/BookList/BookList";
 import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
+import { Stats } from "./components/Stats/Stats";
 import { initialBooks } from "./helpers/initialBooks";
 import type { UserDataType } from "./types/UserDataType";
 
@@ -22,6 +23,7 @@ function App() {
   return (
     <>
       <Header userData={userData} />
+      <Stats books={initialBooks} />
       <BookList books={initialBooks} />
       <BookAddForm />
 
