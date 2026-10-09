@@ -117,6 +117,7 @@ const ContainerCard = styled.div`
   justify-content: right;
   gap: 5px;
   justify-content: left;
+  margin-top: 5px;
 `;
 
 export {

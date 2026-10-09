@@ -40,7 +40,9 @@ export function BookCard(props: { book: Book }) {
         <CoverImgCard src={cover} />
       </CoverCard>
       <CardContent>
-        <TitleCard length={title.length}>{title}</TitleCard>
+        <ContainerCard>
+          <TitleCard length={title.length}>{title}</TitleCard>
+        </ContainerCard>
         <ContainerCard>
           <AuthorCard>{author}</AuthorCard>
           <ImgCard src="src\assets\author.png" width={15} height={15} />
