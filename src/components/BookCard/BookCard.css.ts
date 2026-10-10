@@ -144,6 +144,33 @@ const ContainerCard = styled.div<{ position?: string }>`
   }
 `;
 
+const DeleteButton = styled.button`
+  width: 38px;
+  heigth: 38px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #fffaf4;
+  border: 1px solid #ded6cc;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #f3e9dd;
+  }
+  &:active {
+    background-color: #e8d8c6;
+  }
+  &:focus-visible {
+    border: 2px solid #8b735f;
+    padding: 2px;
+  }
+  &:disabled {
+    opasity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
 export {
   Card,
   CardContent,
@@ -156,4 +183,5 @@ export {
   ImgCard,
   ContainerCard,
   CoverImgCard,
+  DeleteButton,
 };

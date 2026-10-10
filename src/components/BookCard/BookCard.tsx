@@ -11,6 +11,7 @@ import {
   ImgCard,
   ContainerCard,
   CoverImgCard,
+  DeleteButton,
 } from "./BookCard.css.ts";
 
 const formatStatus = {
@@ -71,6 +72,11 @@ export function BookCard(props: { book: Book }) {
         <ContainerCard position="left">
           <ImgCard src={getUrlImg[status]} width={15} height={15} />
           <StatusCard status={status}>{formatStatus[status]}</StatusCard>
+        </ContainerCard>
+        <ContainerCard position="right">
+          <DeleteButton type="button" aria-label="Удалить книгу">
+            <ImgCard src="src\assets\bin.png" width={18} height={18} />
+          </DeleteButton>
         </ContainerCard>
       </CardContent>
     </Card>
