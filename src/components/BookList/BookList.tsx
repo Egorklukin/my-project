@@ -8,6 +8,7 @@ export function BookList(props: BookCardProps) {
   const BookList = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: center;
   `;
 
   const { books } = props;

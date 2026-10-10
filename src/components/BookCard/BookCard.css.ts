@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import type { StatusStyleProps } from "../../types/BookType";
+import type { StatusStyleProps, StatusVariant } from "../../types/BookType";
 
 const Card = styled.article`
   gap: 10px;
@@ -99,25 +99,46 @@ const CoverImgCard = styled.img`
   border-radius: 10px;
 `;
 
-const RaitingCard = styled.h2`
+const RaitingCard = styled.h2<{
+  status: StatusVariant;
+  rating: number | undefined;
+}>`
   text-align: right;
-`;
-const NoRaitingCard = styled.h2`
-  text-align: right;
-  color: gray;
+  color: ${({ status, rating }) => {
+    if (status == "want" || status == "reading") return "gray";
+    else {
+      if (!rating) return "gray";
+    }
+  }};
 `;
 
 const NoteCard = styled.h2``;
 
-const ImgCard = styled.img``;
+const ImgCard = styled.img<{
+  url?: string;
+  rating?: number | undefined;
+  status?: StatusVariant;
+}>`
+  display: ${({ status, rating, url }) => {
+    if (url) {
+      if (status == "want" || status == "reading") return "none";
+      else {
+        if (!rating) return "none";
+      }
+    }
+  }};
+`;
 
 const ContainerCard = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: right;
+  align-items: center;
   gap: 5px;
   justify-content: left;
   margin-top: 5px;
+  * {
+    margin: 0;
+  }
 `;
 
 export {
@@ -128,7 +149,6 @@ export {
   StatusCard,
   CoverCard,
   RaitingCard,
-  NoRaitingCard,
   NoteCard,
   ImgCard,
   ContainerCard,

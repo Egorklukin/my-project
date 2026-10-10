@@ -1,9 +1,4 @@
-import styled from "@emotion/styled";
-import type {
-  Book,
-  StatusStyleProps,
-  StatusVariant,
-} from "../../types/BookType";
+import type { Book } from "../../types/BookType";
 import {
   Card,
   CardContent,
@@ -12,7 +7,6 @@ import {
   StatusCard,
   CoverCard,
   RaitingCard,
-  NoRaitingCard,
   NoteCard,
   ImgCard,
   ContainerCard,
@@ -33,6 +27,13 @@ const getUrlImg = {
 
 export function BookCard(props: { book: Book }) {
   const { title, author, status, rating, note, cover } = props.book;
+  function setTextOfRating() {
+    if (status == "want" || status == "reading") return "Вы еще не прочитали";
+    else {
+      if (!rating) return "Вы не оставили отзыв";
+      else return rating;
+    }
+  }
 
   return (
     <Card>
@@ -47,14 +48,20 @@ export function BookCard(props: { book: Book }) {
           <AuthorCard>{author}</AuthorCard>
           <ImgCard src="src\assets\author.png" width={15} height={15} />
         </ContainerCard>
-        {status == "want" || status == "reading" ? (
-          <NoRaitingCard>Вы еще не прочитали</NoRaitingCard>
-        ) : (
-          <ContainerCard>
-            <ImgCard src="src\assets\raiting.png" width={15} height={15} />
-            <RaitingCard>{rating || "Вы не оставили отзыв"}</RaitingCard>
-          </ContainerCard>
-        )}
+
+        <ContainerCard>
+          <ImgCard
+            src="src\assets\raiting.png"
+            width={15}
+            height={15}
+            url="src\assets\raiting.png"
+            rating={rating}
+            status={status}
+          />
+          <RaitingCard status={status} rating={rating}>
+            {setTextOfRating()}
+          </RaitingCard>
+        </ContainerCard>
         {note && (
           <ContainerCard>
             <ImgCard src="src\assets\note.png" width={15} height={15} />
