@@ -44,12 +44,12 @@ export function BookCard(props: { book: Book }) {
         <ContainerCard>
           <TitleCard length={title.length}>{title}</TitleCard>
         </ContainerCard>
-        <ContainerCard>
+        <ContainerCard position="left">
           <AuthorCard>{author}</AuthorCard>
           <ImgCard src="src\assets\author.png" width={15} height={15} />
         </ContainerCard>
 
-        <ContainerCard>
+        <ContainerCard position="right">
           <ImgCard
             src="src\assets\raiting.png"
             width={15}
@@ -63,12 +63,12 @@ export function BookCard(props: { book: Book }) {
           </RaitingCard>
         </ContainerCard>
         {note && (
-          <ContainerCard>
+          <ContainerCard position="left">
             <ImgCard src="src\assets\note.png" width={15} height={15} />
             <NoteCard>{note}</NoteCard>
           </ContainerCard>
         )}
-        <ContainerCard>
+        <ContainerCard position="left">
           <ImgCard src={getUrlImg[status]} width={15} height={15} />
           <StatusCard status={status}>{formatStatus[status]}</StatusCard>
         </ContainerCard>

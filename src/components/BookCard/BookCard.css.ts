@@ -129,12 +129,15 @@ const ImgCard = styled.img<{
   }};
 `;
 
-const ContainerCard = styled.div`
+const ContainerCard = styled.div<{ position?: string }>`
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 5px;
-  justify-content: left;
+  justify-content: ${({ position }) => {
+    if (position) return position;
+    else return "center";
+  }};
   margin-top: 5px;
   * {
     margin: 0;
