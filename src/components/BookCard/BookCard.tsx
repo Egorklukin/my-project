@@ -26,8 +26,11 @@ const getUrlImg = {
   done: "src/assets/done.png",
 };
 
-export function BookCard(props: { book: Book }) {
-  const { title, author, status, rating, note, cover } = props.book;
+export function BookCard(props: {
+  book: Book;
+  deleteBook: (id: number) => void;
+}) {
+  const { id, title, author, status, rating, note, cover } = props.book;
   function setTextOfRating() {
     if (status == "want" || status == "reading") return "Вы еще не прочитали";
     else {
@@ -74,7 +77,11 @@ export function BookCard(props: { book: Book }) {
           <StatusCard status={status}>{formatStatus[status]}</StatusCard>
         </ContainerCard>
         <ContainerCard position="right">
-          <DeleteButton type="button" aria-label="Удалить книгу">
+          <DeleteButton
+            type="button"
+            aria-label="Удалить книгу"
+            onClick={() => props.deleteBook(id)}
+          >
             <ImgCard src="src\assets\bin.png" width={18} height={18} />
           </DeleteButton>
         </ContainerCard>

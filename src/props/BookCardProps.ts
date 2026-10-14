@@ -1,5 +1,6 @@
-import { type Book } from "../types/BookType";
+import type { Book } from "../types/BookType";
 
-export interface BookCardProps {
-  books: Book[];
+export interface BookListProps {
+  books: Book;
+  deleteBook: Book[];
 }

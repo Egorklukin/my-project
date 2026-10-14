@@ -1,16 +1,6 @@
-import type { UserDataProps } from "../../props/UserDataProps";
-import { UserCard } from "../UserCard/UserCard";
+import { useState } from "react";
 
-export function Header(props: UserDataProps) {
-  console.log(props);
-  const { userData } = props;
-  return (
-    <header>
-      <div>
-        {userData.map((user) => (
-          <UserCard key={user.id} user={user} />
-        ))}
-      </div>
-    </header>
-  );
+export function Header() {
+  const [count, setCount] = useState(0);
+  return <header></header>;
 }

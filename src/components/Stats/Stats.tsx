@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import type { Book, StatusVariant } from "../../types/BookType";
 
-const StatsWrapper = styled.div``;
+const StatsWrapper = styled.div`
+  margin-bottom: 20px;
+`;
 const StatsSection = styled.section`
   display: flex;
   flex-direction: row;
