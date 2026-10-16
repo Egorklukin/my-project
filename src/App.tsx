@@ -9,6 +9,7 @@ import { initialBooks } from "./helpers/initialBooks";
 import type { UserDataType } from "./types/UserDataType";
 import type { Book } from "./types/BookType";
 import styled from "@emotion/styled";
+import { TaskDemo } from "./helpers/TaskDemo";
 
 function App() {
   const [books, setBooks] = useState<Book[]>(initialBooks);
@@ -29,6 +30,7 @@ function App() {
       <Stats books={books} />
       <BookList books={books} deleteBook={deleteBook} />
       <BookAddForm />
+      {/* <TaskDemo /> */}
 
       <Footer />
     </App>
