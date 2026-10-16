@@ -1,96 +1,63 @@
-import styled from "@emotion/styled";
+import { useState } from "react";
+import {
+  FormSection,
+  Form,
+  FormButton,
+  FormContainer,
+  FormField,
+  FormSelect,
+  FormLabel,
+  FormTextarea,
+  FormTitle,
+} from "./BookAddForm.css.ts";
+import type { Book } from "../../types/BookType.tsx";
+import type { BookAddFormProps } from "../../props/BookAddFormProps.ts";
 
-const FormSection = styled.section`
-  padding: 20px;
-`;
+export function BookAddForm({ addBook, id }: BookAddFormProps) {
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [cover, setCover] = useState("");
+  const [rating, setRating] = useState(0);
+  const [status, setStatus] = useState("");
+  const [note, setNote] = useState("");
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-`;
-
-const FormTitle = styled.h2`
-  margin-bottom: 10px;
-  font-size: 24px;
-`;
-
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-`;
-
-const FormLabel = styled.label`
-  font-size: 16px;
-  text-align: left;
-  color: black;
-`;
-
-const FormField = styled.input`
-  padding: 8px 12px;
-  border: 1px solid #9c9c9c;
-  border-radius: 4px;
-  font-size: 14px;
-
-  &:focus {
-    outline: none;
-    border-color: blue;
-  }
-`;
-
-const FormSelect = styled.select`
-  padding: 8px 12px;
-  border: 1px solid #9c9c9c;
-  border-radius: 4px;
-  font-size: 14px;
-  background-color: white;
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
-    border-color: blue;
-  }
-`;
-
-const FormButton = styled.button`
-  padding: 10px 20px;
-  border: 1px solid #9c9c9c;
-  border-radius: 4px;
-  background-color: white;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #e0e0e0;
-  }
-
-  &:active {
-    background-color: #d0d0d0;
-  }
-`;
-export function BookAddForm() {
   return (
     <FormSection>
       <Form>
         <FormTitle>Добавить книгу</FormTitle>
         <FormContainer>
-          <FormLabel htmlFor="name">Название</FormLabel>
-          <FormField id="name" placeholder="Укажите название" />
+          <FormLabel htmlFor="title">Название</FormLabel>
+          <FormField
+            id="title"
+            value={title}
+            placeholder="Укажите название"
+            onChange={(e) => setTitle(e.target.value)}
+          />
         </FormContainer>
         <FormContainer>
           <FormLabel htmlFor="author">Автор</FormLabel>
-          <FormField id="author" placeholder="Укажите автора" />
+          <FormField
+            id="author"
+            value={author}
+            placeholder="Укажите автора"
+            onChange={(e) => setAuthor(e.target.value)}
+          />
         </FormContainer>
         <FormContainer>
           <FormLabel htmlFor="cover">Обложка</FormLabel>
-          <FormField id="cover" placeholder="Укажите ссылку на обложку" />
+          <FormField
+            id="cover"
+            value={cover}
+            onChange={(e) => setCover(e.target.value)}
+            placeholder="Укажите ссылку на обложку"
+          />
         </FormContainer>
         <FormContainer>
-          <FormSelect>
+          <FormSelect
+            id="status"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+          >
             <option value="want">Хочу прочитать</option>
             <option value="reading">Читаю сейчас</option>
             <option value="done">Прочитано</option>
@@ -98,10 +65,32 @@ export function BookAddForm() {
         </FormContainer>
         <FormContainer>
           <FormLabel htmlFor="rating">Рейтинг</FormLabel>
-          <FormField id="rating" placeholder="Укажите вашу оценку книге" />
+          <FormField
+            id="rating"
+            value={rating}
+            type="number"
+            onChange={(e) => setRating(Number(e.target.value))}
+            placeholder="Укажите вашу оценку книге"
+          />
         </FormContainer>
         <FormContainer>
-          <FormButton type="submit" name="add-button">
+          <FormLabel htmlFor="note">{note}</FormLabel>
+          <FormTextarea
+            id="note"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            placeholder="Укажите ваши заметки здесь"
+          />
+        </FormContainer>
+        <FormContainer>
+          <FormButton
+            type="submit"
+            name="add-button"
+            onClick={(e) => {
+              e.preventDefault();
+              addBook({ id, title, author, status, rating, note, cover });
+            }}
+          >
             Добавить книгу
           </FormButton>
         </FormContainer>

@@ -24,13 +24,17 @@ function App() {
     setBooks(newBooks);
   }
 
+  function addBook(newBook: Book): void {
+    return setBooks((books) => [...books, newBook]);
+  }
+
   return (
     <App>
       <Header />
       <Stats books={books} />
       <BookList books={books} deleteBook={deleteBook} />
-      <BookAddForm />
-      {/* <TaskDemo /> */}
+      <BookAddForm addBook={addBook} id={books.length} />
+      <TaskDemo />
 
       <Footer />
     </App>

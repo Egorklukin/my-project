@@ -66,11 +66,11 @@ export function TaskDemo() {
       </button>
 
       {tasks.length === 0 ? (
-        <p>Задач пока нет.</p>
+        <p>Задач пока нет</p>
       ) : (
-        <ul>
+        <article>
           {tasks.map((task) => (
-            <li key={task.id}>
+            <div key={task.id}>
               <span>
                 {task.isCompleted ? "Выполнено" : "В процессе"} {task.title}
               </span>
@@ -82,9 +82,9 @@ export function TaskDemo() {
               <button type="button" onClick={() => deleteTask(task.id)}>
                 Удалить
               </button>
-            </li>
+            </div>
           ))}
-        </ul>
+        </article>
       )}
     </section>
   );
