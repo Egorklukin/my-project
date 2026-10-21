@@ -23,10 +23,18 @@ const FormContainer = styled.div`
   width: 400px;
 `;
 
-const FormLabel = styled.label`
+const FormLabel = styled.label<{ required?: boolean }>`
   font-size: 16px;
   text-align: left;
   color: black;
+  ${({ required }) =>
+    required &&
+    `&::after {
+    content: '*';
+    color: red;
+    margin-left: 4px;
+    font-weight: bold;
+  }`}
 `;
 
 const FormField = styled.input`
@@ -83,6 +91,17 @@ const FormButton = styled.button`
   &:active {
     background-color: #d0d0d0;
   }
+  &:disabled {
+    cursor: not-allowed;
+    opasity: 0.5;
+  }
+`;
+const ErrorMessage = styled.p`
+  // TODO
+  color: red;
+  font-size: 12px;
+  margin: 4px 0 0 0;
+  text-align: left;
 `;
 
 export {
@@ -95,4 +114,5 @@ export {
   FormSelect,
   FormLabel,
   FormTitle,
+  ErrorMessage,
 };

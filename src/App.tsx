@@ -33,7 +33,7 @@ function App() {
       <Header />
       <Stats books={books} />
       <BookList books={books} deleteBook={deleteBook} />
-      <BookAddForm addBook={addBook} id={books.length} />
+      <BookAddForm addBook={addBook} id={books.length + 1} />
       <TaskDemo />
 
       <Footer />

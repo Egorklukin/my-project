@@ -42,7 +42,7 @@ export function BookCard(props: {
   return (
     <Card>
       <CoverCard status={status}>
-        <CoverImgCard src={cover} />
+        <CoverImgCard src={cover || "https://moqimg.ru/180x270.png"} />
       </CoverCard>
       <CardContent>
         <ContainerCard>

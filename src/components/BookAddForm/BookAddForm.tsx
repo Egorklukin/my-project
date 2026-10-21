@@ -8,25 +8,38 @@ import {
   FormSelect,
   FormLabel,
   FormTextarea,
+  ErrorMessage, // TODO
   FormTitle,
 } from "./BookAddForm.css.ts";
-import type { Book } from "../../types/BookType.tsx";
 import type { BookAddFormProps } from "../../props/BookAddFormProps.ts";
+import { type StatusVariant } from "../../types/BookType.tsx";
 
 export function BookAddForm({ addBook, id }: BookAddFormProps) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [cover, setCover] = useState("");
   const [rating, setRating] = useState(0);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState<StatusVariant>("want");
   const [note, setNote] = useState("");
 
+  function getStateButton(): boolean {
+    if (!title || !author) return true;
+    return false;
+  }
+
+  function checkFormatUrl(): boolean {
+    // TODO
+    if (cover.includes("http")) return true;
+    return false;
+  }
   return (
     <FormSection>
       <Form>
         <FormTitle>Добавить книгу</FormTitle>
         <FormContainer>
-          <FormLabel htmlFor="title">Название</FormLabel>
+          <FormLabel htmlFor="title" required>
+            Название
+          </FormLabel>
           <FormField
             id="title"
             value={title}
@@ -35,7 +48,9 @@ export function BookAddForm({ addBook, id }: BookAddFormProps) {
           />
         </FormContainer>
         <FormContainer>
-          <FormLabel htmlFor="author">Автор</FormLabel>
+          <FormLabel htmlFor="author" required>
+            Автор
+          </FormLabel>
           <FormField
             id="author"
             value={author}
@@ -53,28 +68,31 @@ export function BookAddForm({ addBook, id }: BookAddFormProps) {
           />
         </FormContainer>
         <FormContainer>
+          <FormLabel htmlFor="status">Укажите, на каком этапе книга</FormLabel>
           <FormSelect
             id="status"
             value={status}
-            onChange={(e) => setStatus(e.target.value)}
+            onChange={(e) => setStatus(e.target.value as StatusVariant)}
           >
             <option value="want">Хочу прочитать</option>
             <option value="reading">Читаю сейчас</option>
             <option value="done">Прочитано</option>
           </FormSelect>
         </FormContainer>
+        {status === "done" && (
+          <FormContainer>
+            <FormLabel htmlFor="rating">Рейтинг</FormLabel>
+            <FormField
+              id="rating"
+              value={rating}
+              type="number"
+              onChange={(e) => setRating(Number(e.target.value))}
+              placeholder="Укажите вашу оценку книге"
+            />
+          </FormContainer>
+        )}
         <FormContainer>
-          <FormLabel htmlFor="rating">Рейтинг</FormLabel>
-          <FormField
-            id="rating"
-            value={rating}
-            type="number"
-            onChange={(e) => setRating(Number(e.target.value))}
-            placeholder="Укажите вашу оценку книге"
-          />
-        </FormContainer>
-        <FormContainer>
-          <FormLabel htmlFor="note">{note}</FormLabel>
+          <FormLabel htmlFor="note">Заметки</FormLabel>
           <FormTextarea
             id="note"
             value={note}
@@ -90,6 +108,7 @@ export function BookAddForm({ addBook, id }: BookAddFormProps) {
               e.preventDefault();
               addBook({ id, title, author, status, rating, note, cover });
             }}
+            disabled={getStateButton()}
           >
             Добавить книгу
           </FormButton>
