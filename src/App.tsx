@@ -9,7 +9,7 @@ import { initialBooks } from "./helpers/initialBooks";
 import type { UserDataType } from "./types/UserDataType";
 import type { Book } from "./types/BookType";
 import styled from "@emotion/styled";
-import { TaskDemo } from "./helpers/TaskDemo";
+import { TaskDemo } from "./Demo/TaskDemo";
 
 function App() {
   const [books, setBooks] = useState<Book[]>(initialBooks);
@@ -25,6 +25,7 @@ function App() {
   }
 
   function addBook(newBook: Book): void {
+    console.log(books);
     return setBooks((books) => [...books, newBook]);
   }
 
@@ -34,7 +35,6 @@ function App() {
       <Stats books={books} />
       <BookList books={books} deleteBook={deleteBook} />
       <BookAddForm addBook={addBook} id={books.length + 1} />
-      <TaskDemo />
 
       <Footer />
     </App>

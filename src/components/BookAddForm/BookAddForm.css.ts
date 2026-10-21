@@ -96,11 +96,9 @@ const FormButton = styled.button`
     opasity: 0.5;
   }
 `;
-const ErrorMessage = styled.p`
-  // TODO
+const ErrorMessage = styled.h2`
   color: red;
-  font-size: 12px;
-  margin: 4px 0 0 0;
+  font-size: 14px;
   text-align: left;
 `;
 

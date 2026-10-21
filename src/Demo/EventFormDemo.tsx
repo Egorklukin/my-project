@@ -31,10 +31,10 @@ export function EventFormat() {
       />
       <div>
         <h3>Текущие данные</h3>
-        <p>Название: {title ?? "не указано"}</p>
+        <p>Название: {title ?? "-"}</p>
         <p>Формат: {format}</p>
         <p>Участники: {countOfParticipants}</p>
-        <p>Описание: {description || "не добавлено"}</p>
+        <p>Описание: {description || "-"}</p>
       </div>
     </section>
   );

@@ -8,11 +8,12 @@ import {
   FormSelect,
   FormLabel,
   FormTextarea,
-  ErrorMessage, // TODO
+  ErrorMessage,
   FormTitle,
 } from "./BookAddForm.css.ts";
 import type { BookAddFormProps } from "../../props/BookAddFormProps.ts";
 import { type StatusVariant } from "../../types/BookType.tsx";
+import { initialBooks } from "../../helpers/initialBooks.ts";
 
 export function BookAddForm({ addBook, id }: BookAddFormProps) {
   const [title, setTitle] = useState("");
@@ -23,14 +24,21 @@ export function BookAddForm({ addBook, id }: BookAddFormProps) {
   const [note, setNote] = useState("");
 
   function getStateButton(): boolean {
-    if (!title || !author) return true;
+    if (!title || !author || checkFormatUrl() || chechFormatRating())
+      return true;
     return false;
   }
 
   function checkFormatUrl(): boolean {
-    // TODO
-    if (cover.includes("http")) return true;
+    if (cover.trim().length > 0) {
+      if (!cover.trim().includes("http")) return true;
+    }
     return false;
+  }
+
+  function chechFormatRating(): boolean {
+    if (rating in [0, 1, 2, 3, 4, 5]) return false;
+    return true;
   }
   return (
     <FormSection>
@@ -46,6 +54,9 @@ export function BookAddForm({ addBook, id }: BookAddFormProps) {
             placeholder="Укажите название"
             onChange={(e) => setTitle(e.target.value)}
           />
+          {title.trim().length === 0 && (
+            <ErrorMessage>Это обязательное поле</ErrorMessage>
+          )}
         </FormContainer>
         <FormContainer>
           <FormLabel htmlFor="author" required>
@@ -57,6 +68,9 @@ export function BookAddForm({ addBook, id }: BookAddFormProps) {
             placeholder="Укажите автора"
             onChange={(e) => setAuthor(e.target.value)}
           />
+          {author.trim().length === 0 && (
+            <ErrorMessage>Это обязательное поле</ErrorMessage>
+          )}
         </FormContainer>
         <FormContainer>
           <FormLabel htmlFor="cover">Обложка</FormLabel>
@@ -66,6 +80,9 @@ export function BookAddForm({ addBook, id }: BookAddFormProps) {
             onChange={(e) => setCover(e.target.value)}
             placeholder="Укажите ссылку на обложку"
           />
+          {checkFormatUrl() && (
+            <ErrorMessage>Неверный формат URL обложки</ErrorMessage>
+          )}
         </FormContainer>
         <FormContainer>
           <FormLabel htmlFor="status">Укажите, на каком этапе книга</FormLabel>
@@ -89,6 +106,9 @@ export function BookAddForm({ addBook, id }: BookAddFormProps) {
               onChange={(e) => setRating(Number(e.target.value))}
               placeholder="Укажите вашу оценку книге"
             />
+            {chechFormatRating() && (
+              <ErrorMessage>Неверное значение рейтинга</ErrorMessage>
+            )}
           </FormContainer>
         )}
         <FormContainer>
@@ -107,6 +127,11 @@ export function BookAddForm({ addBook, id }: BookAddFormProps) {
             onClick={(e) => {
               e.preventDefault();
               addBook({ id, title, author, status, rating, note, cover });
+              setTitle("");
+              setAuthor("");
+              setCover("");
+              setStatus("want");
+              setNote("");
             }}
             disabled={getStateButton()}
           >
